@@ -23,6 +23,10 @@ var answer = {};
 var tagHidden = {};
 var noVal = {};
 var radios = {};
+var idxReview1 = 10000000;
+var idxReview2 = 10000000;
+var firstSpace = 10000000;
+var lastSpace = 10000000;
 // answerHiddenDuplicates value of answer but is needed because
 // otherwise the data is not sent
 var answerHidden = {};
@@ -107,7 +111,7 @@ var  makeFormRow = function(key) {
                 .addClass('col-sm-8')
                 .append(input)
             )
-            .append($('<div>')
+            /*.append($('<div>')
                 .addClass('col-sm-4')
                 .append($('<div>')
                     .addClass('form-check')
@@ -115,7 +119,7 @@ var  makeFormRow = function(key) {
                     .append(' ')
                     .append(label)
                 )
-            )
+            )*/
         )
     );
     answer[key] = input;
@@ -202,7 +206,45 @@ var delete_annotation = function(annotation_id) {
 
 var add_annotation = function(annotation) {
     old_annotations = annotations[key].slice();
-    annotations[key].push(annotation);
+
+    if (idxReview1 == 10000000 || idxReview2 == 10000000) {
+        for(var i = 0; i < tokens.length; ++i) {
+            token = tokens[i];
+            if(token && token.includes('<strong>Review1:</strong>')) {
+                idxReview1 = i;
+            }
+
+            if(token && token.includes('<strong>Review2:</strong>')) {
+                idxReview2 = i;
+                break;
+            }
+
+            if(token && token.includes('<p><br /></p>')) {
+                if (firstSpace == 10000000){
+                    firstSpace = i;
+                }
+                else{
+                    lastSpace = i;
+                }
+            }
+        };
+    }
+
+    if ((annotation[0] == idxReview1 && annotation[1] == idxReview1 + 1) || (annotation[0] == idxReview2 && annotation[1] == idxReview + 1)) {
+        annotation = [];
+    }
+
+    if (annotation[0] == idxReview1 || annotation[0] == idxReview2) {
+        annotation[0] += 1;
+    }
+
+    if (annotation[1] == idxReview2) {
+        annotation[0] -= 1;
+    }
+
+    if (annotation.length > 0) {
+        annotations[key].push(annotation);
+    }
 }
 
 var toggle_old_new = function() {
@@ -228,16 +270,34 @@ var sequence_html = function(sequence, annotations) {
         ret[annotation[1]-1] = ret[annotation[1]-1] + '</strong>';
     });
 
-    return ret.join(' ');
+    return ret.join(' ').replace('<p>', '');
 }
 
 
 
 var canSubmit = function() {
-    for (var key of keys) {
-        if (values[key] == "" && !noVal[key].is(":checked")) { return false; }
+    if (tokens == null) {
+        return false;
     }
-    return true;
+
+    cansubmit = false;
+    for (var key of keys) {
+        if (annotations[key] == null) {
+            return false;
+        }
+
+        if (values[key].replace(/ {1,}/g, ' ') != "" ) {
+            var idx = annotations[key].flat();
+
+            if ((idxReview1 < idx[0] && idx[0] < firstSpace && idxReview2 + 1< idx[idx.length-1])) {
+                cansubmit = true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    return cansubmit;
 }
 
 var show = function() {
@@ -247,7 +307,7 @@ var show = function() {
     //fill_annotated_values(datum);
     seq_html = sequence_html(tokens, annotations[key]);
     well.html(seq_html);
-    values[key] = get_value();
+    values[key] = get_value().replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<strong>/g, '').replace(/<\/strong>/g, '').replace(/<br \/>/g, '').replace(/Review1:/, '').replace(/Review2:/, '').replace(/ {1,}/g, ' ');
     answer[key].val(values[key]);
     answerHidden[key].val(values[key]);
     tagHidden[key].val(annotations[key]);

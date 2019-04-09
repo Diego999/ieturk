@@ -3,14 +3,20 @@
 // ---------------------------------------------------------
 
 var fieldName = {
-    "name": "Product name",
-    "version": "Product version",
-    "protocol": "Protocol",
+    "elem1": "Aspect 1",
+    "elem2": "Aspect 2",
+    "elem3": "Aspect 3",
+    "elem4": "Aspect 4",
+    "elem5": "Aspect 5",
+    "elem6": "Aspect 6",
 }
 var shortName = {
-    "name": "name",
-    "version": "version",
-    "protocol": "protocol",
+    "elem1": "Aspect 1",
+    "elem2": "Aspect 2",
+    "elem3": "Aspect 3",
+    "elem4": "Aspect 4",
+    "elem5": "Aspect 5",
+    "elem6": "Aspect 6",
 }
 var longDesc = {
     "name": "Product name. Name of the software/device/library that is affected by this vulnerability ",
@@ -18,8 +24,11 @@ var longDesc = {
     "protocol": "Form in which the input is given to exploit the vulnerability",
 }
 var shortcutKey = {
-    "name": "a",
-    "version": "e",
-    "protocol": "r",
+    "elem1": "1",
+    "elem2": "2",
+    "elem3": "3",
+    "elem4": "4",
+    "elem5": "5",
+    "elem6": "6",
 }
 
