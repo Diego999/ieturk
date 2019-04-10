@@ -103,6 +103,11 @@
     background-color: #FFFFB3;
 }
 
+.btn-submit {
+    width:100%;
+    margin-top:10px;
+}
+
 .annotation6 {
     font-weight: normal;
     background-color: #BEBADA;

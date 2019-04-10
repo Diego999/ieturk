@@ -99,7 +99,7 @@ var  makeFormRow = function(key) {
     );
 
     var div = ($(
-        '<div>')
+        '<div style="display:none;">')
         .addClass('col-xs-12 col-sm-12 content')
         .append($('<label>')
             .attr({'for': key})
