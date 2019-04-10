@@ -103,11 +103,6 @@
     background-color: #FFFFB3;
 }
 
-.btn-submit {
-    width:100%;
-    margin-top:10px;
-}
-
 .annotation6 {
     font-weight: normal;
     background-color: #BEBADA;
@@ -127,10 +122,36 @@
     font-size: 10px;
 }
 
+.btn-submit {
+    width:100%;
+    margin-top:10px;
+}
+
 input[disabled] {
     color: #000
 }
 
-#key-name {
+.key-name1 {
     background-color: #EAD379;
+}
+.key-name2 {
+    background-color: #67BCDB;
+}
+.key-name3 {
+    background-color: #B3DE69;
+}
+.key-name4 {
+    background-color: #FCCDE5;
+}
+.key-name5 {
+    background-color: #FFFFB3;
+}
+.key-name6 {
+    background-color: #BEBADA;
+}
+.key-name7 {
+    background-color: #80B1D3;
+}
+.key-name8 {
+    background-color: #FDB462;
 }

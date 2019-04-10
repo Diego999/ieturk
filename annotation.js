@@ -15,7 +15,6 @@ var raw = $('#raw');
 var well = $('#well');
 var submit = $('#submit');
 var choice = $('#choice');
-var keyname = $('#key-name');
 var instructionTable = $('#instruction-table');
 
 var form = $("#form");
@@ -315,7 +314,7 @@ var show = function() {
     tagHidden[key].val(annotations[key]);
     console.log(key);
     console.log(annotations[key]);
-    keyname.html(shortName[key]);
+    //keyname.html(shortName[key]);
 
 
     // Handler on tokens
@@ -355,18 +354,37 @@ $("#remove").click(function() {
     show();
 });
 
+
 //highlight selected category
 var inputs = $("#choice input:radio");
 inputs.change(function(){
     inputs.parent().removeClass("btn-success");
     inputs.parent().addClass("btn-default");
+
+    for (var elem of $("#choice label")) {
+        for (var i = 1; i <= 8; ++i) {
+            var removed = false;
+
+            if ($(elem).prop("classList").contains("key-name" + i)) {
+                $(elem).removeClass("key-name" + i);
+                removed = true;
+            }
+
+            if (removed) {
+                break;
+            }
+        }
+    }
+
     if($(this).is(":checked")){
         key =  $(this).val();
         $(this).parent().removeClass("btn-default");
-        $(this).parent().addClass("btn-success");
+        //$(this).parent().addClass("btn-success");
+        $(this).parent().addClass("key-name" + shortcutKey[key]);
         show();
     }else{
-        $(this).parent().removeClass("btn-success");
+        //var a = 2;
+        //$(this).parent().removeClass("btn-success");
         $(this).parent().addClass("btn-default");
     }
 });
