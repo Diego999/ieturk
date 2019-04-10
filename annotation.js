@@ -264,11 +264,13 @@ var sequence_html = function(sequence, annotations) {
         return '<span class="token" id=tok_' + index + '> '
             + token + ' </span>';
     });
-    _.each(annotations, function(annotation) {
-        ret[annotation[0]] = '<strong class="annotation">'
-            + ret[annotation[0]];
-        ret[annotation[1]-1] = ret[annotation[1]-1] + '</strong>';
-    });
+    for(var key of keys) {
+        _.each(annotations[key], function(annotation) {
+            ret[annotation[0]] = '<strong class="annotation' + shortcutKey[key] + '">'
+                + ret[annotation[0]];
+            ret[annotation[1]-1] = ret[annotation[1]-1] + '</strong>';
+        });
+    }
 
     return ret.join(' ').replace('<p>', '');
 }
@@ -305,7 +307,7 @@ var show = function() {
         return a[0] - b[0];
     });
     //fill_annotated_values(datum);
-    seq_html = sequence_html(tokens, annotations[key]);
+    seq_html = sequence_html(tokens, annotations);
     well.html(seq_html);
     values[key] = get_value().replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<strong>/g, '').replace(/<\/strong>/g, '').replace(/<br \/>/g, '').replace(/Review1:/, '').replace(/Review2:/, '').replace(/ {1,}/g, ' ');
     answer[key].val(values[key]);

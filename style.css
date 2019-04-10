@@ -46,13 +46,76 @@
     text-decoration: underline;
 }
 
-.ann > strong.annotation:hover {
+.ann > strong.annotation1:hover {
     text-decoration: line-through;
 }
 
-.annotation {
+.ann > strong.annotation2:hover {
+    text-decoration: line-through;
+}
+
+.ann > strong.annotation3:hover {
+    text-decoration: line-through;
+}
+
+.ann > strong.annotation4:hover {
+    text-decoration: line-through;
+}
+
+.ann > strong.annotation5:hover {
+    text-decoration: line-through;
+}
+
+.ann > strong.annotation6:hover {
+    text-decoration: line-through;
+}
+
+.ann > strong.annotation7:hover {
+    text-decoration: line-through;
+}
+
+.ann > strong.annotation8:hover {
+    text-decoration: line-through;
+}
+
+.annotation1 {
     font-weight: normal;
     background-color: #EAD379;
+}
+
+.annotation2 {
+    font-weight: normal;
+    background-color: #67BCDB;
+}
+
+.annotation3 {
+    font-weight: normal;
+    background-color: #B3DE69;
+}
+
+.annotation4 {
+    font-weight: normal;
+    background-color: #FCCDE5;
+}
+
+.annotation5 {
+    font-weight: normal;
+    background-color: #FFFFB3;
+}
+
+.annotation6 {
+    font-weight: normal;
+    background-color: #BEBADA;
+}
+
+.annotation7 {
+    font-weight: normal;
+    background-color: #80B1D3;
+}
+
+.annotation8 {
+    font-weight: normal;
+    background-color: #FDB462;
 }
 
 .btn-ann {
