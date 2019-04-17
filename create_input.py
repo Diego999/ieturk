@@ -1,9 +1,15 @@
 import csv
+import re
+import string   
+
+def turk_tokenization(text):
+	text = re.sub('([.,!?()])', r' \1 ', text)
+	text = re.sub('\s{2,}', ' ', text)
+	return text.split()
+
 
 if __name__ == '__main__':
-	SEP = "  >> <p><br /></p> >> "
-	TITLE_REVIEW = ' >> <p><strong>Review{}:</strong><br /></p> >> '
-	COLUMNS = ['id','sep','title_review1','title_review2','review1','review2']
+	COLUMNS = ['review1','review2']
 	reviews = ["This hotel is lovely. We checked in straight away, our room was very spacious and very clean. There was a TV, fridge, hairdryer and a nice view over a lake from the window. The room was cleaned with fresh towels every day.The Universal Parks are just a few minutes walk away from the hotel or you can catch a boat. One of the best features of staying here is having your room key as your fast pass to skip the very large lines to get on the rides. Also the pool is fantastic and huge so you never feel crowded, all very relaxing.All the staff were very friendly and they were all only too pleased to help you if you needed something.We had a fantastic holiday and are counting the days til we can go back and do it all over again.",
 				"Got a discount rate thanks to my annual pass, but probably would have been pleased paying the rack rate as well. The rooms are on the small side, but it's not like we spent much time there. Beautiful decor, friendly staff, and an amazing pool that could hold over a hundred people and still be roomy. Was concerned about dogs being allowed, but rarely saw them and certainly didn't notice any on my floor. The proximity to Universal and express pass on the rides are invaluable -- water taxi is nice but we used the garden path most times because it took less time. Avoid eating at the hotel, though -- believe it or not, the parks and City Walk are less expensive. Had dinner at a City Walk place called the Latin Quarter that was great!",
 				"I had a great stay at this hotel, one myself and my family enjoyed very much. There was everything you wnated in the hotel. The rooms were nice and not old and the food was fantastic. I especially recomend Tchoup chop, the restaurent run by the chef Emril and had two fantastic meals. Perhaps breakfast was overpriced but you could easily get something in the parks. However what was brillant was when you were at a universal Park all you had to do was show them you room key and you went to the front of all the rides. also visited the other hotels and i felt that the royal Pacific matched them if not was better. Definatly recommend!",
@@ -33,12 +39,8 @@ if __name__ == '__main__':
 		writer.writeheader()
 
 		for id, i in enumerate(range(0, len(reviews), 2)):
-			pair = {'id':id,
-					'sep': SEP,
-					'title_review1': TITLE_REVIEW.format(1),
-					'title_review2': TITLE_REVIEW.format(2),
-					'review1': '>>'.join(reviews[i].split()),
-					'review2': '>>'.join(reviews[i+1].split()),
+			pair = {'review1': '>>'.join(turk_tokenization(reviews[i])),
+					'review2': '>>'.join(turk_tokenization(reviews[i+1])),
 					}
 			writer.writerow(pair);
 

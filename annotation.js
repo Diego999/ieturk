@@ -412,5 +412,13 @@ trigger.click(function(){
 key = keys[0];
 radios[key].click();
 var tokens = raw.text().split(">>");
+for (var i = 0; i < tokens.length; ++i) {
+    if ($.trim(tokens[i]) == 'Review1:') {
+        tokens[i] = '<p><strong>' + tokens[i] + '</strong><br /></p>';
+    }
+    else if ($.trim(tokens[i]) == 'Review2:') {
+        tokens[i] = '<p><br /><strong>' + tokens[i] + '</strong><br /></p>';
+    }
+}
 raw.hide();
 show();
