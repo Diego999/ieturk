@@ -3,24 +3,57 @@
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="panel panel-primary"><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Tagging Instructions</strong> <span class="collapse-text">(Click to expand)</span> </a>
-                <div class="panel-body" id="instructionBody"><strong>Tag the description to extract the following fields of interest</strong>
-                    <table class="table table-condensed table-striped table-responsive">
-                        <colgroup>
-                            <col class="col-xs-2 col-md-2" />
-                            <col class="col-xs-10 col-md-10" />
-                        </colgroup>
-                        <tbody id="instruction-table">
-                        </tbody>
-                    </table>
+                <div class="panel-body" id="instructionBody">
+                    <h3>Goal</h3>
+                    <p>We will show you two reviews from the same hotel. 
+                    <strong>
+                        Highlight word sequences in these two reviews talking about the same aspect of the hotel. 
+                    </strong> <br /> <br />Aspects refer to properties/attributes of products or services.
+                    <strong>Examples of aspects</strong> could be food, service, pool, room, dog allowance, cleanliness, taxi, etc.
+                    </p>
+                    <h3>Constraints</h3>
+                    <p>
+                        <ul>
+                            <li>You can select at most 6 different aspects.</li>
+                            <li>Colors are here to help you distinguish different aspects. You can select a new aspect on the right panel. </li>
+                            <li>For each of these, you must <strong class="annotation1">highlight</strong> a word sequence in <strong><u>both</u></strong> reviews talking about the same aspect (using the left click on a word and moving the cursor).</li>
+                                <ul>
+                                    <li>For instance, it is possible that the first review consists of word sequences of only one aspect (i.e. one color) and the second of several aspects (i.e. multiple colors) or vice-versa. In this case, only higlight the overlapping aspect.</li>
+                                </ul>
+                            <li>Select the shortest span of texts, for example:</li>
+                                <ul>
+                                    <li>"<i><strong class="annotation1">This is the most beautiful hotel</strong> I have ever stayed in ."</i></li>
+                                    <li>"<i>The last day we were there we went down to <strong class="annotation1">breakfast, and the food wasn't all that great</strong>."</i></li>
+                                </ul>
+                        </ul>
+                    </p>
+                    <h3>Invalid submissions</h3>
+                    <p>
+                        You will not be able to submit an answer if:
+                        <ul>
+                            <li>You higlight an aspect in only one review and not the other.</li>
+                            <li>You do not highlight any aspect.</li>
+                            <li>You select less than three words.</li>
+                        </ul>
+                    </p>
+                    <h3>Examples</h3>
+                    <p>
+                    <strong>Below, please find examples illustrating the task.</strong>
+                    </p>
                     <div class="text-center">
-                        <img src="images/tagging.gif" alt="tagging" width="50%"/>
+                        <h4 id="e1">Example 1</h4>
+                        <img src="https://lia.epfl.ch:/sample_4.png" alt="tagging" width="75%"/>
+                        <h4 id="e2">Example 2</h4>
+                        <img src="https://lia.epfl.ch:/sample_5.png" alt="tagging" width="75%"/>
+                        <h4 id="e3">Example 3</h4>
+                        <img src="https://lia.epfl.ch:/sample_6.png" alt="tagging" width="75%"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <h2>Select <strong>PARTS IN THE 2 REVIEWS</strong> talking about the same thing</h2>
+    <h2>Highlight word sequences in these two reviews talking about the same aspect of the hotel</h2>
     <div id="raw">${title_review1} ${review1} ${sep} ${sep} ${title_review2} ${review2}</div>
 
     <div class="row" id="workContent">
@@ -38,7 +71,7 @@
             </div>
 
             <div class="btn-group-vertical" data-toggle="buttons" id="choice"></div>
-            <div ><span title="Highlight all fields before submitting"><input id="submit" class="btn btn-default btn-submit" data-key="Enter" type="submit" disabled=disabled /></span></div>
+            <div ><input id="submit" class="btn btn-default btn-submit" data-key="Enter" type="submit" name="input_form" disabled=disabled /></div>
         </div>
 
     </div>
@@ -53,3 +86,12 @@
 <!--Uncomment the next line for a NER task-->
 <!--<script src="example/config.js"></script>--> 
 <script src="annotation.js"></script>
+<!--
+<style type="text/css">
+
+</style>
+
+<script>
+
+</script>
+-->

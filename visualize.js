@@ -17,52 +17,12 @@ var title = $('#title');
 var prev = $('#prev');
 var next = $('#next');
 var cur = $('#cur');
-var form = $("#form");
 
 var keys = [];
 var key2id = {};
 var answer = {};
 var contents = [];
 var idx = 0;
-
-// ---------------------------------------------------------
-// Create jQuery elements
-// ---------------------------------------------------------
-
-var makeFormRow = function(key) {
-    var input = ($(
-        '<input>')
-        .attr({'type': 'text', 'disabled':'disabled', 'id': key})
-        .addClass('form-control')
-    );
-
-    var div = ($(
-        '<div>')
-        .addClass('col-xs-12 col-sm-12 content')
-        .append($('<label>')
-            .attr({'for': key})
-            .text(key)
-        )
-        .append($('<div>')
-            .addClass('form-row')
-            .append($('<div>')
-                .addClass('col-sm-8')
-                .append(input)
-            )
-            .append($('<div>')
-                .addClass('disp col-sm-4')
-                .append($('<strong>')
-                    .addClass('annotation annotation-' + key2id[key])
-                    .text(key)
-                )
-            )
-        )
-    );
-    answer[key] = input;
-    return div;
-}
-
-
 
 // ---------------------------------------------------------
 // Displaying
@@ -77,7 +37,7 @@ var sequence_html = function(sequence, annotationsDict) {
         for (var i = 0; i < annotations.length; i+=2) {
             var begin = parseInt(annotations[i]);
             var stop = parseInt(annotations[i+1]);
-            ret[begin] = '<strong class="annotation annotation-' + key2id[key] + '">' + ret[begin];
+            ret[begin] = '<strong class="annotation annotation' + key2id[key] + '">' + ret[begin];
             ret[stop -1 ] = ret[stop -1] + '</strong>';
         }
     }
@@ -94,11 +54,11 @@ var show = function() {
     seq_html = sequence_html(tokens, annotationsDict);
     well.html(seq_html);
     cur.html(1 + idx + "/" + contents.length);
-    for (let key of keys) {
+    /*for (let key of keys) {
         answer[key].val(values[key]);
         var index = key2id[key];
         $(".annotation-" + index).css("background-color", colors[index % colors.length]);
-    }
+    }*/
 };
 
 // ---------------------------------------------------------
@@ -156,7 +116,7 @@ function loadData(file) {
                 keys.push(col.substring(0, r));
             }
         }
-        for (var [index, key] of keys.entries()) { key2id[key] = index; }
+        for (var [index, key] of keys.entries()) { key2id[key] = index + 1; }
         // Create header
         var html = '';
         html += '<thead>\r\n';
@@ -178,7 +138,7 @@ function loadData(file) {
             html += '</tr>\r\n';
 
             contents.push({
-                'description': row[col2id["description"]],
+                'description': row[col2id["title_review1"]] + row[col2id["review1"]] + row[col2id["sep"]] + row[col2id["sep"]]  + row[col2id["title_review2"]] + row[col2id["review2"]],
                 'annotations': keys.reduce(function(obj, key) {
                     obj[key] = row[col2id[key + "-tag"]]; return obj;
                 }, {}),
@@ -190,9 +150,7 @@ function loadData(file) {
         html += '</tbody>\r\n';
         // Create html
         $('#contents').html(html);
-        for (var key of keys) {
-            form.append(makeFormRow(key));
-        }
+
         // Add handler on links
         $('.entry').click(function() {
             idx = parseInt($(this).attr('data-val'));
