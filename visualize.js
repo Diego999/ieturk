@@ -138,7 +138,7 @@ function loadData(file) {
             html += '</tr>\r\n';
 
             contents.push({
-                'description': row[col2id["title_review1"]] + row[col2id["review1"]] + row[col2id["sep"]] + row[col2id["sep"]]  + row[col2id["title_review2"]] + row[col2id["review2"]],
+                'description': " >> <p><strong>Review1:</strong><br /></p> >>  " + row[col2id["review1"]] + "  >> <p><br /></p> >>   >> <p><br /></p> >>   >> <p><strong>Review2:</strong><br /></p> >>  " + row[col2id["review2"]],
                 'annotations': keys.reduce(function(obj, key) {
                     obj[key] = row[col2id[key + "-tag"]]; return obj;
                 }, {}),

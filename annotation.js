@@ -209,16 +209,16 @@ var add_annotation = function(annotation) {
     if (idxReview1 == 10000000 || idxReview2 == 10000000) {
         for(var i = 0; i < tokens.length; ++i) {
             token = tokens[i];
-            if(token && token.includes('<strong>Review1:</strong>')) {
+            if(token && token.includes('<p><strong> Review1: </strong><br /></p>')) {
                 idxReview1 = i;
             }
 
-            if(token && token.includes('<strong>Review2:</strong>')) {
+            if(token && token.includes('<p><br /><strong> Review2: </strong><br /></p>')) {
                 idxReview2 = i;
                 break;
             }
 
-            if(token && token.includes('<p><br /></p>')) {
+            if(token && $.trim(token) == '' && i > 10) {
                 if (firstSpace == 10000000){
                     firstSpace = i;
                 }
